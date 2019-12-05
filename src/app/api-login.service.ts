@@ -5,6 +5,9 @@ import {HttpClient} from '@angular/common/http';
 export interface UserData {
   email: string;
   password: string;
+  password1: string;
+  password2: string;
+  username: string;
 }
 
 
@@ -21,5 +24,8 @@ export class ApiLoginService {
   }
 
 
+  register(userData: UserData) {
+    return this.ApiLogin.post('http://localhost:8000/auth/signup/', userData);
+  }
 
 }

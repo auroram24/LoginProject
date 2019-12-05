@@ -12,6 +12,8 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   @ViewChild('fff', {static: true}) ourForm: NgForm;
 
+  formShow = true;
+
   constructor(
     private apiService: ApiLoginService,
     private router: Router
@@ -29,21 +31,36 @@ export class LoginComponent implements OnInit {
 
   submitButton() {
     if (this.ourForm.valid) {
-      this.apiService.login(this.ourForm.value).subscribe(
-        response => {
-          console.log(response);
-          this.ourForm.form.reset();
-          this.router.navigate(['menu']);
-        }
-      );
-    } else {
-      console.log('Not valid');
+     if (this.formShow) {
+       this.apiService.login(this.ourForm.value).subscribe(
+         response => {
+           console.log(response);
+           console.log(this.ourForm.form);
+           console.log(this.ourForm.value);
+           this.router.navigate(['menu']);
+         },
+         error => {
+           console.log(error);
+         }
+       );
+     } else {
+       this.apiService.register(this.ourForm.value).subscribe(
+         response => {
+           console.log(response);
+           this.formShow = true;
+         },
+         error => {
+           console.log(error);
+         }
+       );
+     }
     }
+  }
 
 
 
-
-
+  changeMode() {
+    this.formShow = !this.formShow;
   }
 
 }

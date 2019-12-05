@@ -4,7 +4,7 @@
 
       <input
         type="email"
-        placeholder="Username"
+        placeholder="Email"
         name="email"
         ngModel
         required
@@ -14,40 +14,85 @@
       <p class="error-label" *ngIf="!email.valid && email.touched">
         <span *ngIf="email.errors.required">This input is required</span>
         <span *ngIf="email.errors.email">Not valid email</span>
-
       </p>
 
 
-
       <input
+        *ngIf="formShow"
         type="password"
         placeholder="Password"
         name="password"
         ngModel
         required
-        #password = "ngModel"
+        #pass = "ngModel"
 
       >
-      <p class="error-label" *ngIf="!password.valid && password.touched">
-        This input is required
-      </p>
+
+<!--      <p class="error-label" *ngIf="pass">-->
+<!--        This input is required-->
+<!--      </p>-->
+
+
+      <input
+        *ngIf="!formShow"
+        type="password"
+        placeholder="Password"
+        name="password1"
+        ngModel
+        required
+
+      >
+
+
+      <input
+        *ngIf="!formShow"
+        type="password"
+        placeholder="Confirm the password"
+        name="password2"
+        ngModel
+        required
+        #password2 ="ngModel"
+      >
+
+<!--      <p class="error-label" *ngIf="!.valid && password.touched">-->
+<!--        This input is required-->
+<!--      </p>-->
+
+      <input
+        *ngIf="!formShow"
+        type="text"
+        placeholder="Username"
+        name="username"
+        ngModel
+        required
+        #password = "ngModel"
+      >
 
 
       <button
         type="submit"
         (click)="submitButton()"
       >
-        Login
+        {{formShow? 'Login': 'Signup'}}
       </button>
 
+
+<!--      <div *ngIf=" ourForm.valid && email.touched && password.touched ">-->
+<!--        <span class="error-label">Invalid username/password</span>-->
+<!--      </div>-->
+
+
+
     </form>
+
 
 
     <div id="formFooter">
       <span
       class="underlineHover"
+      (click)="changeMode()"
       >
-        <strong>Switch To Register</strong>
+        <strong>{{formShow? 'Don`t have an account? Click': 'Already have an account? Click!'}}</strong>
       </span>
     </div>
 
