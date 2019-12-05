@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {ApiLoginService} from '../api-login.service';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -9,9 +12,38 @@ import {NgForm} from '@angular/forms';
 export class LoginComponent implements OnInit {
   @ViewChild('fff', {static: true}) ourForm: NgForm;
 
-  constructor() { }
+  constructor(
+    private apiService: ApiLoginService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    // setTimeout( () => {
+    //   this.ourForm.form.setValue({
+    //     email: 'nirooma@icloud.com',
+    //     password: '12345',
+    //   });
+    // }, );
+  }
+
+
+  submitButton() {
+    if (this.ourForm.valid) {
+      this.apiService.login(this.ourForm.value).subscribe(
+        response => {
+          console.log(response);
+          this.ourForm.form.reset();
+          this.router.navigate(['menu']);
+        }
+      );
+    } else {
+      console.log('Not valid');
+    }
+
+
+
+
+
   }
 
 }

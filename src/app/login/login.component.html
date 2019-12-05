@@ -3,20 +3,39 @@
     <form #fff="ngForm">
 
       <input
-        type="text"
+        type="email"
         placeholder="Username"
-        name="username"
+        name="email"
+        ngModel
+        required
+        #email = "ngModel"
+        email
       >
+      <p class="error-label" *ngIf="!email.valid && email.touched">
+        <span *ngIf="email.errors.required">This input is required</span>
+        <span *ngIf="email.errors.email">Not valid email</span>
+
+      </p>
+
 
 
       <input
         type="password"
         placeholder="Password"
         name="password"
+        ngModel
+        required
+        #password = "ngModel"
+
       >
+      <p class="error-label" *ngIf="!password.valid && password.touched">
+        This input is required
+      </p>
+
 
       <button
-
+        type="submit"
+        (click)="submitButton()"
       >
         Login
       </button>
