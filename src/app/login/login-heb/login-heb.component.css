@@ -1,9 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c&display=swap');
+
 h1{
-  font-family: 'Amatic SC', cursive;
-  font-size: 45px;
+ font-family: 'M PLUS Rounded 1c', sans-serif;
 }
-
-
 a {
   color: #92badd;
   display:inline-block;

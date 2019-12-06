@@ -2,7 +2,11 @@ h1{
   font-family: 'Poiret One', cursive;
 }
 
+.alert {
+border-radius: 80px;
 
+
+}
 
 a {
   color: #92badd;

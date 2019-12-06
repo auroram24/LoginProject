@@ -1,12 +1,23 @@
-<link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
 
 <a style="font-size: 30px" routerLink="/">Menu in english</a>
 
+
+<div class="background">
 <div class="wrapper fadeInDown">
   <div id="formContent">
-    <form #fff="ngForm">
 
-      <h1>{{formShow? 'כניסה למשתמשים': 'הרשמה'}}</h1>
+
+    <form (ngSubmit)="submitButton()" #fff="ngForm">
+
+      <h1 style="font-size: 30px">{{formShow? 'כניסה למשתמשים': 'הרשמה למשתמש חדש'}}</h1>
+
+
+      <div class="alert alert-success" *ngIf="userRegisterSuccessfully">
+        User Register successfully, an email has been send. please confirm the authentication.
+      <br>
+      </div>
+
 
       <input
         type="email"
@@ -17,9 +28,10 @@
         #email = "ngModel"
         email
       >
+
+
       <p class="error-label" *ngIf="!email.valid && email.touched">
-        <span *ngIf="email.errors.required">שדה חובה</span>
-        <span *ngIf="email.errors.email">אימייל לא תקין</span>
+        <span *ngIf="email.errors.email">Not valid email</span>
       </p>
 
 
@@ -32,21 +44,15 @@
         #pass = "ngModel"
       >
 
-      <p class="error-label" *ngIf="!pass.valid && pass.touched">
-        שדה חובה
-      </p>
-
-
 
       <input
         *ngIf="!formShow"
         type="password"
-        placeholder="חזור על הסיסמה"
+        placeholder="חזור שנית על הסיסמא"
         name="password2"
         ngModel
         required
       >
-
 
 
       <input
@@ -62,17 +68,35 @@
       <button
         *ngIf="email.valid && email.touched"
         type="submit"
-        (click)="submitButton()"
       >
         {{formShow? 'כניסה': 'הרשמה'}}
       </button>
 
 
-<!--      <div *ngIf=" ourForm.valid && email.touched ">-->
-<!--        <span class="error-label">Invalid username/password</span>-->
-<!--      </div>-->
+      <div class="alert alert-danger" *ngIf="hasError">
+         {{hasError}}<strong>:סיבה  </strong>
+      <br>
+      </div>
 
 
+      <div class="alert alert-danger" *ngIf="emailError">
+         {{emailError}}<strong> :אימייל  e</strong>
+      </div>
+
+
+      <div class="alert alert-danger" *ngIf="passwordError">
+         {{passwordError}}<strong> :סיסמא</strong>
+      </div>
+
+
+      <div class="alert alert-danger" *ngIf="userError ">
+          {{userError}}<strong> :שם משתמש</strong>
+      </div>
+
+
+      <div class="alert alert-danger" *ngIf="passwordNotEquals">
+        Passwords are not equal, please insert the same passwords.
+      </div>
 
     </form>
 
@@ -83,12 +107,11 @@
       class="underlineHover"
       (click)="changeMode()"
       >
-        <strong >{{formShow? 'להרשמה לחץ כאן': 'לכניסה לחץ כאן' }} </strong>
+        <strong>{{formShow? 'לחץ להרשמה': 'לחץ לכניסה'  }} </strong>
       </span>
     </div>
 
 
-
-
   </div>
+ </div>
 </div>

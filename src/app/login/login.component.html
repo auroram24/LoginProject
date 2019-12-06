@@ -1,4 +1,4 @@
-<link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Neucha&display=swap" rel="stylesheet">
 
 <a style="font-size: 30px" routerLink="login-heb">תפריט בעברית</a>
 
@@ -6,22 +6,23 @@
 <div class="background">
 <div class="wrapper fadeInDown">
   <div id="formContent">
+
+
     <form (ngSubmit)="submitButton()" #fff="ngForm">
 
       <h1>{{formShow? 'Welcome to login': 'Welcome to register'}}</h1>
+      <br>
 
-
-
-      <div class="alert alert-danger" *ngIf="hasError || emailError ">
-        {{hasError}}
-        {{emailError}}
+      <div class="alert alert-danger" *ngIf="!email.valid && email.touched">
+        <span *ngIf="email.errors.email">Invalid email, correct the email</span>
         <br>
       </div>
 
-      <div class="alert alert-danger" *ngIf="userError ">
-        {{userError}}
-      </div>
 
+      <div class="alert alert-success" *ngIf="userRegisterSuccessfully">
+        User Register successfully, an email has been send. please confirm the authentication.
+      <br>
+      </div>
 
 
       <input
@@ -33,10 +34,6 @@
         #email = "ngModel"
         email
       >
-      <p class="error-label" *ngIf="!email.valid && email.touched">
-        <span *ngIf="email.errors.required">This input is required</span>
-        <span *ngIf="email.errors.email">Not valid email</span>
-      </p>
 
 
       <input
@@ -48,11 +45,6 @@
         #pass = "ngModel"
       >
 
-      <p class="error-label" *ngIf="!pass.valid && pass.touched">
-        This input is required
-      </p>
-
-
 
       <input
         *ngIf="!formShow"
@@ -62,7 +54,6 @@
         ngModel
         required
       >
-
 
 
       <input
@@ -76,21 +67,41 @@
 
 
       <button
-        *ngIf="email.valid && email.touched"
+        *ngIf="email.valid && email.touched "
         type="submit"
       >
         {{formShow? 'Login': 'Signup'}}
       </button>
 
 
-      <div class="alert alert-danger" *ngIf="passwordError">
-        {{passwordError}}
+      <div class="alert alert-danger text-center"  *ngIf="hasError ">
+        {{hasError}}
+      <br>
+      </div>
+
+      <div class="alert alert-danger" *ngIf="emailError">
+       <strong>Email: </strong> {{emailError}}
+        <br>
       </div>
 
 
+      <div class="alert alert-danger" *ngIf="passwordError">
+        <strong>Password: </strong> {{passwordError}}
+        <br>
+      </div>
 
 
+      <div class="alert alert-danger" *ngIf="userError ">
+        <strong>Username: </strong> {{userError}}
+        <br>
+      </div>
 
+
+      <div class="alert alert-danger" *ngIf="passwordNotEquals">
+        Passwords are not equal, please insert the same passwords.
+        <br>
+        <br>
+      </div>
 
     </form>
 
@@ -98,14 +109,13 @@
     <br>
     <div id="formFooter">
       <span
-      class="underlineHover"
-      (click)="changeMode()"
+        style="font-family: 'Neucha', cursive; font-size: 22px"
+        class="underlineHover"
+        (click)="changeMode()"
       >
-        <strong>{{formShow? 'Don`t have an account?': 'Already have an account?' }} </strong>
+        <strong>{{formShow? 'Don`t have an account?  REGISTER': 'Already have an account? LOGIN'  }} </strong>
       </span>
     </div>
-
-
 
 
   </div>
