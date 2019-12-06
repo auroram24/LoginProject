@@ -1,18 +1,16 @@
-<link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
 
-<a style="font-size: 30px" routerLink="login-heb">תפריט בעברית</a>
+<a style="font-size: 30px" routerLink="/">Menu in english</a>
 
-
-<div class="background">
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <form #fff="ngForm">
 
-      <h1>{{formShow? 'Welcome to login': 'Welcome to register'}}</h1>
+      <h1>{{formShow? 'כניסה למשתמשים': 'הרשמה'}}</h1>
 
       <input
         type="email"
-        placeholder="Email"
+        placeholder="אימייל"
         name="email"
         ngModel
         required
@@ -20,14 +18,14 @@
         email
       >
       <p class="error-label" *ngIf="!email.valid && email.touched">
-        <span *ngIf="email.errors.required">This input is required</span>
-        <span *ngIf="email.errors.email">Not valid email</span>
+        <span *ngIf="email.errors.required">שדה חובה</span>
+        <span *ngIf="email.errors.email">אימייל לא תקין</span>
       </p>
 
 
       <input
         type="password"
-        placeholder="Password"
+        placeholder="סיסמא"
         name="password"
         ngModel
         required
@@ -35,7 +33,7 @@
       >
 
       <p class="error-label" *ngIf="!pass.valid && pass.touched">
-        This input is required
+        שדה חובה
       </p>
 
 
@@ -43,7 +41,7 @@
       <input
         *ngIf="!formShow"
         type="password"
-        placeholder="Confirm the password"
+        placeholder="חזור על הסיסמה"
         name="password2"
         ngModel
         required
@@ -54,7 +52,7 @@
       <input
         *ngIf="!formShow"
         type="text"
-        placeholder="Username"
+        placeholder="שם משתמש"
         name="username"
         ngModel
         required
@@ -66,7 +64,7 @@
         type="submit"
         (click)="submitButton()"
       >
-        {{formShow? 'Login': 'Signup'}}
+        {{formShow? 'כניסה': 'הרשמה'}}
       </button>
 
 
@@ -85,7 +83,7 @@
       class="underlineHover"
       (click)="changeMode()"
       >
-        <strong>{{formShow? 'Don`t have an account?': 'Already have an account?' }} </strong>
+        <strong >{{formShow? 'להרשמה לחץ כאן': 'לכניסה לחץ כאן' }} </strong>
       </span>
     </div>
 
@@ -93,5 +91,4 @@
 
 
   </div>
- </div>
 </div>

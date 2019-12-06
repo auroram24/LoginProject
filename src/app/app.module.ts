@@ -10,12 +10,16 @@ import { MenuComponent } from './menu/menu.component';
 
 
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { LoginHebComponent } from './login/login-heb/login-heb.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MenuComponent,
+    LoginHebComponent,
+
   ],
   imports: [
     BrowserModule,
