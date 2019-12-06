@@ -18,30 +18,18 @@
 
 
       <input
-        *ngIf="formShow"
         type="password"
         placeholder="Password"
         name="password"
         ngModel
         required
         #pass = "ngModel"
-
       >
 
-<!--      <p class="error-label" *ngIf="pass">-->
-<!--        This input is required-->
-<!--      </p>-->
+      <p class="error-label" *ngIf="!pass.valid && pass.touched">
+        This input is required
+      </p>
 
-
-      <input
-        *ngIf="!formShow"
-        type="password"
-        placeholder="Password"
-        name="password1"
-        ngModel
-        required
-
-      >
 
 
       <input
@@ -51,12 +39,9 @@
         name="password2"
         ngModel
         required
-        #password2 ="ngModel"
       >
 
-<!--      <p class="error-label" *ngIf="!.valid && password.touched">-->
-<!--        This input is required-->
-<!--      </p>-->
+
 
       <input
         *ngIf="!formShow"
@@ -65,7 +50,6 @@
         name="username"
         ngModel
         required
-        #password = "ngModel"
       >
 
 
@@ -77,7 +61,7 @@
       </button>
 
 
-<!--      <div *ngIf=" ourForm.valid && email.touched && password.touched ">-->
+<!--      <div *ngIf=" ourForm.valid && email.touched ">-->
 <!--        <span class="error-label">Invalid username/password</span>-->
 <!--      </div>-->
 
@@ -92,7 +76,7 @@
       class="underlineHover"
       (click)="changeMode()"
       >
-        <strong>{{formShow? 'Don`t have an account? Click': 'Already have an account? Click!'}}</strong>
+        <strong>{{formShow? 'Don`t have an account?': 'Already have an account?' }} </strong><p style="color: red">Click here</p>
       </span>
     </div>
 
