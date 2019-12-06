@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {tap} from 'rxjs/operators';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {tap, catchError} from 'rxjs/operators';
+import {throwError} from 'rxjs';
 
 
 
@@ -25,8 +26,11 @@ export class ApiLoginService {
     return this.ApiLogin.post('http://127.0.0.1:8000/auth/login/', userData).
     pipe(
       tap(
-        // error => console.log(error)
-      )
+        response => {
+
+        }),
+      catchError(this.handlerError)
+
     );
   }
 
@@ -35,9 +39,20 @@ export class ApiLoginService {
     return this.ApiLogin.post('http://localhost:8000/auth/signup/', userData).
       pipe(
         tap(
-          // error
-        )
+          response => {
+
+          }),
+      catchError(this.handlerError)
     );
+  }
+
+
+
+  handlerError(errorObject: HttpErrorResponse) {
+    if (errorObject.status === 0) {
+      return throwError('Server is down, try again later');
+    }
+    return throwError(errorObject.error);
   }
 
 }

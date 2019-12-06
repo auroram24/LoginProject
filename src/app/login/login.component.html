@@ -6,9 +6,23 @@
 <div class="background">
 <div class="wrapper fadeInDown">
   <div id="formContent">
-    <form #fff="ngForm">
+    <form (ngSubmit)="submitButton()" #fff="ngForm">
 
       <h1>{{formShow? 'Welcome to login': 'Welcome to register'}}</h1>
+
+
+
+      <div class="alert alert-danger" *ngIf="hasError || emailError ">
+        {{hasError}}
+        {{emailError}}
+        <br>
+      </div>
+
+      <div class="alert alert-danger" *ngIf="userError ">
+        {{userError}}
+      </div>
+
+
 
       <input
         type="email"
@@ -64,15 +78,17 @@
       <button
         *ngIf="email.valid && email.touched"
         type="submit"
-        (click)="submitButton()"
       >
         {{formShow? 'Login': 'Signup'}}
       </button>
 
 
-<!--      <div *ngIf=" ourForm.valid && email.touched ">-->
-<!--        <span class="error-label">Invalid username/password</span>-->
-<!--      </div>-->
+      <div class="alert alert-danger" *ngIf="passwordError">
+        {{passwordError}}
+      </div>
+
+
+
 
 
 

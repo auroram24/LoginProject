@@ -14,12 +14,20 @@ export class LoginComponent implements OnInit {
 
   formShow = true;
 
+  hasError = null;
+  emailError = null;
+  userError = null;
+  passwordError = null;
+
+
+
 
 
   constructor(
     private apiService: ApiLoginService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     // setTimeout( () => {
@@ -30,7 +38,8 @@ export class LoginComponent implements OnInit {
     // }, );
   }
 
-    changeMode() {
+  changeMode() {
+    this.hasError = null;
     this.formShow = !this.formShow;
   }
 
@@ -40,24 +49,31 @@ export class LoginComponent implements OnInit {
       if (this.formShow) {
         this.apiService.login(this.ourForm.value).subscribe(
           response => {
-            console.log(response);
+
             this.router.navigate(['menu']);
+          },
+          error => {
+            this.hasError = error.non_field_errors;
+
           });
 
       } else {
         this.ourForm.value.password1 = this.ourForm.value.password;
+        this.hasError = null;
         this.apiService.register(this.ourForm.value).subscribe(
-          reponse => {
-            console.log(reponse);
-            this.formShow = true;
+          response => {
+
+          },
+          error => {
+            this.emailError = error.email;
+            this.userError = error.username;
+            this.passwordError = error.password1;
+
           }
         );
       }
     }
+
+
   }
-
-
-
-
-
 }
