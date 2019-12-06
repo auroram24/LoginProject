@@ -36,31 +36,23 @@ export class LoginComponent implements OnInit {
 
 
   submitButton() {
-    if (this.ourForm.valid) {
-     if (this.formShow) {
-       this.apiService.login(this.ourForm.value).subscribe(
-         response => {
-           console.log(response);
-           console.log(this.ourForm.form);
-           console.log(this.ourForm.value.password);
-           this.router.navigate(['menu']);
-         },
-         error => {
-           console.log(error);
-         }
-       );
-     } else {
-       this.ourForm.value.password1 = this.ourForm.value.password;
-       this.apiService.register(this.ourForm.value).subscribe(
-         response => {
-           console.log(response);
-           this.formShow = true;
-         },
-         error => {
-           console.log(error);
-         }
-       );
-     }
+    if (this.ourForm.value) {
+      if (this.formShow) {
+        this.apiService.login(this.ourForm.value).subscribe(
+          response => {
+            console.log(response);
+            this.router.navigate(['menu']);
+          });
+
+      } else {
+        this.ourForm.value.password1 = this.ourForm.value.password;
+        this.apiService.register(this.ourForm.value).subscribe(
+          reponse => {
+            console.log(reponse);
+            this.formShow = true;
+          }
+        );
+      }
     }
   }
 

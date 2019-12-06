@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {tap} from 'rxjs/operators';
+
 
 
 export interface UserData {
@@ -20,7 +22,12 @@ export class ApiLoginService {
 
 
   login(userData: UserData) {
-    return this.ApiLogin.post('http://127.0.0.1:8000/auth/login/', userData);
+    return this.ApiLogin.post('http://127.0.0.1:8000/auth/login/', userData).
+    pipe(
+      tap(
+        // error => console.log(error)
+      )
+    );
   }
 
 
