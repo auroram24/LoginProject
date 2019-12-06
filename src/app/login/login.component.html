@@ -1,6 +1,10 @@
+<link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
+
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <form #fff="ngForm">
+
+      <h1>{{formShow? 'Welcome to Login': 'Welcome to register'}}</h1>
 
       <input
         type="email"
@@ -54,6 +58,7 @@
 
 
       <button
+        *ngIf="email.valid && email.touched"
         type="submit"
         (click)="submitButton()"
       >
@@ -70,13 +75,13 @@
     </form>
 
 
-
+    <br>
     <div id="formFooter">
       <span
       class="underlineHover"
       (click)="changeMode()"
       >
-        <strong>{{formShow? 'Don`t have an account?': 'Already have an account?' }} </strong><p style="color: red">Click here</p>
+        <strong>{{formShow? 'Don`t have an account?': 'Already have an account?' }} </strong>
       </span>
     </div>
 
