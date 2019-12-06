@@ -32,7 +32,12 @@ export class ApiLoginService {
 
 
   register(userData: UserData) {
-    return this.ApiLogin.post('http://localhost:8000/auth/signup/', userData);
+    return this.ApiLogin.post('http://localhost:8000/auth/signup/', userData).
+      pipe(
+        tap(
+          // error
+        )
+    );
   }
 
 }
