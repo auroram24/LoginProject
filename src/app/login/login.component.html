@@ -14,12 +14,12 @@
       <br>
 
       <div class="alert alert-danger" *ngIf="!email.valid && email.touched">
-        <span *ngIf="email.errors.email">Invalid email, correct the email</span>
+        <span>Invalid email, correct the email</span>
         <br>
       </div>
 
 
-      <div class="alert alert-success" style="height: 80px; border-radius: 0" *ngIf="userRegisterSuccessfully">
+      <div class="alert alert-success" *ngIf="userRegisterSuccessfully">
         User Register successfully, an email has been send. please confirm the authentication.
       <br>
       </div>
@@ -97,7 +97,7 @@
         <br>
       </div>
 
-      <div class="alert alert-danger" style="height: 90px" *ngIf="passwordError">
+      <div class="alert alert-danger" *ngIf="passwordError">
          {{passwordError}}
         <br>
       </div>
