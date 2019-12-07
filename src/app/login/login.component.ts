@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
           this.passwordNotEquals = true;
           setTimeout(() => {
             this.passwordNotEquals = false;
-          }, 8000);
+          }, 10000);
         }
 
         this.apiService.register(this.ourForm.value).subscribe(
@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
                 this.emailError = null;
                 this.userError = null;
                 this.passwordError = null;
-              }, 8000);
+              }, 10000);
             },
 
           );
