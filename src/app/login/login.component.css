@@ -3,7 +3,10 @@ h1{
 }
 
 .alert {
-border-radius: 80px;
+
+  margin: auto auto 20px auto;
+  width: 440px;
+  text-align: center;
 
 
 }
@@ -40,7 +43,7 @@ h2 {
   width: 100%;
   min-height: 100%;
   padding: 20px;
-  margin-top: 10%;
+  margin-top: 2%;
 }
 
 #formContent {

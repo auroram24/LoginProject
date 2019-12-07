@@ -77,6 +77,7 @@ export class LoginComponent implements OnInit {
               this.emailError = null;
               this.passwordError = null;
               this.userError = null;
+              this.passwordNotEquals = false;
 
               this.userRegisterSuccessfully = true;
               setTimeout(() => {

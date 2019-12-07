@@ -19,7 +19,7 @@
       </div>
 
 
-      <div class="alert alert-success" *ngIf="userRegisterSuccessfully">
+      <div class="alert alert-success" style="height: 80px; border-radius: 0" *ngIf="userRegisterSuccessfully">
         User Register successfully, an email has been send. please confirm the authentication.
       <br>
       </div>
@@ -80,19 +80,13 @@
       </div>
 
       <div class="alert alert-danger" *ngIf="emailError">
-       <strong>Email: </strong> {{emailError}}
-        <br>
-      </div>
-
-
-      <div class="alert alert-danger" *ngIf="passwordError">
-        <strong>Password: </strong> {{passwordError}}
+        {{emailError}}
         <br>
       </div>
 
 
       <div class="alert alert-danger" *ngIf="userError ">
-        <strong>Username: </strong> {{userError}}
+         {{userError}}
         <br>
       </div>
 
@@ -100,6 +94,11 @@
       <div class="alert alert-danger" *ngIf="passwordNotEquals">
         Passwords are not equal, please insert the same passwords.
         <br>
+        <br>
+      </div>
+
+      <div class="alert alert-danger" style="height: 90px" *ngIf="passwordError">
+         {{passwordError}}
         <br>
       </div>
 
