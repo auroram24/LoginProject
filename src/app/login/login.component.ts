@@ -10,15 +10,18 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('fff', {static: true}) ourForm: NgForm;
 
-  formShow = true;
-  hasError = null;
-  emailError = null;
-  userError = null;
-  passwordError = null;
-  userRegisterSuccessfully = false;
-  passwordNotEquals = false;
+
+  loginMode = true;
+  error: string = null;
+  successMessage = false;
+
+
+
+  // emailError = null;
+  // userError = null;
+  // passwordError = null;
+
 
 
 
@@ -40,75 +43,47 @@ export class LoginComponent implements OnInit {
   }
 
 
-  submitButton() {
-    if (this.ourForm.value) {
-      if (this.formShow) {
-
-        // login function
-        this.apiService.login(this.ourForm.value).subscribe(
+  submitButton(inputData: NgForm) {
+    if (inputData.valid) {
+      if (this.loginMode) {
+        this.apiService.login(inputData.value).subscribe(
           response => {
             this.router.navigate(['menu']);
           },
-          error => {
-            this.passwordError = error.password;
-
-            this.hasError = error.non_field_errors;
+          errorResponse => {
+            this.error = errorResponse;
+            inputData.form.controls.password.reset();
             setTimeout(() => {
-              this.passwordError = null;
-              this.hasError = null;
-            }, 8000);
-          });
-
+              this.error = null;
+            }, 4000);
+          }
+        );
       } else {
-
-        // register function
-        this.ourForm.value.password1 = this.ourForm.value.password;
-
-        if (this.ourForm.value.password1 !== this.ourForm.value.password2) {
-          this.passwordNotEquals = true;
-          setTimeout(() => {
-            this.passwordNotEquals = false;
-          }, 10000);
-        }
-
-        this.apiService.register(this.ourForm.value).subscribe(
-            response => {
-              this.formShow = true;
-              this.emailError = null;
-              this.passwordError = null;
-              this.userError = null;
-              this.passwordNotEquals = false;
-
-              this.userRegisterSuccessfully = true;
-              setTimeout(() => {
-                this.userRegisterSuccessfully = false;
-              }, 8000);
-            },
-            error => {
-
-              this.emailError = error.email;
-              this.userError = error.username;
-              this.passwordError = error.password1;
-              setTimeout(() => {
-                this.emailError = null;
-                this.userError = null;
-                this.passwordError = null;
-              }, 10000);
-            },
-
-          );
+        inputData.value.password1 = inputData.value.password;
+        this.apiService.register(inputData.value).subscribe(
+          response => {
+            this.loginMode = true;
+            this.successMessage = true;
+            setTimeout(() => {
+              this.successMessage = false;
+            }, 6000);
+          },
+          errorResponse => {
+            this.error = errorResponse;
+            setTimeout(() => {
+              this.error = null;
+            }, 4000);
+          }
+        );
       }
     }
   }
 
 
+
     changeMode() {
-    this.hasError = null;
-    this.userError = null;
-    this.emailError = null;
-    this.passwordError = null;
-    this.formShow = !this.formShow;
-    this.passwordNotEquals = null;
+    this.loginMode = !this.loginMode;
+    console.log(this.loginMode);
   }
 
 

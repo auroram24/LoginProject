@@ -23,36 +23,44 @@ export class ApiLoginService {
 
 
   login(userData: UserData) {
-    return this.ApiLogin.post('http://127.0.0.1:8000/auth/login/', userData).
-    pipe(
-      tap(
-        response => {
-
-        }),
-      catchError(this.handlerError)
-
-    );
+    return this.ApiLogin.post('http://127.0.0.1:8000/auth/login/', userData)
+      .pipe(
+       catchError(
+        errorResponse => {
+          if (errorResponse.status === 0) {
+            console.log(errorResponse);
+            return throwError('Server is shutdown for some fixes, try again in few min');
+          }
+          return throwError(errorResponse.error.non_field_errors);
+        }));
   }
 
 
   register(userData: UserData) {
     return this.ApiLogin.post('http://localhost:8000/auth/signup/', userData).
       pipe(
-        tap(
-          response => {
-
+        catchError(
+          errorResponse => {
+            if (errorResponse.status === 0) {
+              return throwError('Server is shutdown for some fixes, try again in few min');
+            }
+            console.log(errorResponse.error);
+            return throwError(errorResponse.error.email);
           }),
-      catchError(this.handlerError)
-    );
+      tap(
+        response => {
+
+        }
+      ));
   }
 
 
 
-  handlerError(errorObject: HttpErrorResponse) {
-    if (errorObject.status === 0) {
-      return throwError('Server is down, try again later');
-    }
-    return throwError(errorObject.error);
-  }
+  // handlerError(errorObject: HttpErrorResponse) {
+  //   if (errorObject.status === 0) {
+  //     return throwError('Server is down, try again later');
+  //   }
+  //   return throwError(errorObject.error);
+  // }
 
 }

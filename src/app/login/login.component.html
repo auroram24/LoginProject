@@ -8,9 +8,9 @@
   <div id="formContent">
 
 
-    <form (ngSubmit)="submitButton()" #fff="ngForm">
+    <form (ngSubmit)="submitButton(fff)" #fff="ngForm">
 
-      <h1>{{formShow? 'Welcome to login': 'Welcome to register'}}</h1>
+      <h1>{{loginMode? 'Welcome to login': 'Welcome to register'}}</h1>
       <br>
 
       <div class="alert alert-danger" *ngIf="!email.valid && email.touched">
@@ -19,7 +19,7 @@
       </div>
 
 
-      <div class="alert alert-success" *ngIf="userRegisterSuccessfully">
+      <div class="alert alert-success" *ngIf="successMessage">
         User Register successfully, an email has been send. please confirm the authentication.
       <br>
       </div>
@@ -42,12 +42,12 @@
         name="password"
         ngModel
         required
-        #pass = "ngModel"
+        minlength="8"
       >
 
 
       <input
-        *ngIf="!formShow"
+        *ngIf="!loginMode"
         type="password"
         placeholder="Confirm the password"
         name="password2"
@@ -57,7 +57,7 @@
 
 
       <input
-        *ngIf="!formShow"
+        *ngIf="!loginMode"
         type="text"
         placeholder="Username"
         name="username"
@@ -67,17 +67,20 @@
 
 
       <button
-        *ngIf="email.valid && email.touched "
+        [hidden]="!fff.valid"
         type="submit"
       >
-        {{formShow? 'Login': 'Signup'}}
+        {{loginMode? 'Login': 'Signup'}}
       </button>
 
+      <div *ngIf="error">
+      <br><br>
+      <div class="alert alert-danger text-center"  *ngIf="error ">
 
-      <div class="alert alert-danger text-center"  *ngIf="hasError ">
-        {{hasError}}
+        {{error}}
       <br>
       </div>
+        </div>
 
       <div class="alert alert-danger" *ngIf="emailError">
         {{emailError}}
@@ -112,7 +115,7 @@
         class="underlineHover"
         (click)="changeMode()"
       >
-        <strong>{{formShow? 'Don`t have an account?  REGISTER': 'Already have an account? LOGIN'  }} </strong>
+        <strong>{{loginMode? 'Don`t have an account?  REGISTER': 'Already have an account? LOGIN'  }} </strong>
       </span>
     </div>
 
