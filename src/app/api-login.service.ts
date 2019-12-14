@@ -19,11 +19,11 @@ export interface UserData {
 })
 export class ApiLoginService {
 
-  constructor(private ApiLogin: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
 
   login(userData: UserData) {
-    return this.ApiLogin.post('http://127.0.0.1:8000/auth/login/', userData)
+    return this.httpClient.post('http://127.0.0.1:8000/auth/login/', userData)
       .pipe(
        catchError(
         errorResponse => {
@@ -37,15 +37,16 @@ export class ApiLoginService {
 
 
   register(userData: UserData) {
-    return this.ApiLogin.post('http://localhost:8000/auth/signup/', userData).
+    return this.httpClient.post('http://localhost:8000/auth/signup/', userData).
       pipe(
         catchError(
           errorResponse => {
             if (errorResponse.status === 0) {
               return throwError('Server is shutdown for some fixes, try again in few min');
+            } else {
+              return throwError(errorResponse.error.non_field_errors || errorResponse.error.email || errorResponse.error.username);
             }
-            console.log(errorResponse.error);
-            return throwError(errorResponse.error.email);
+
           }),
       tap(
         response => {
@@ -53,6 +54,8 @@ export class ApiLoginService {
         }
       ));
   }
+
+
 
 
 

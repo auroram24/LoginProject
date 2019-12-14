@@ -17,16 +17,6 @@ export class LoginComponent implements OnInit {
   successMessage = false;
 
 
-
-  // emailError = null;
-  // userError = null;
-  // passwordError = null;
-
-
-
-
-
-
   constructor(
     private apiService: ApiLoginService,
     private router: Router
@@ -55,7 +45,7 @@ export class LoginComponent implements OnInit {
             inputData.form.controls.password.reset();
             setTimeout(() => {
               this.error = null;
-            }, 4000);
+            }, 6000);
           }
         );
       } else {
@@ -72,12 +62,13 @@ export class LoginComponent implements OnInit {
             this.error = errorResponse;
             setTimeout(() => {
               this.error = null;
-            }, 4000);
+            }, 6000);
           }
         );
       }
     }
   }
+
 
 
 

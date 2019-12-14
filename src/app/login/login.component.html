@@ -8,9 +8,12 @@
   <div id="formContent">
 
 
+
+
     <form (ngSubmit)="submitButton(fff)" #fff="ngForm">
 
       <h1>{{loginMode? 'Welcome to login': 'Welcome to register'}}</h1>
+
       <br>
 
       <div class="alert alert-danger" *ngIf="!email.valid && email.touched">
@@ -73,42 +76,29 @@
         {{loginMode? 'Login': 'Signup'}}
       </button>
 
-      <div *ngIf="error">
-      <br><br>
-      <div class="alert alert-danger text-center"  *ngIf="error ">
 
+            <br><br>
+
+
+      <div class="alert alert-danger text-center"  *ngIf="error ">
         {{error}}
       <br>
       </div>
-        </div>
 
-      <div class="alert alert-danger" *ngIf="emailError">
-        {{emailError}}
-        <br>
+
+
+      <div class="alert alert-danger text-center"  *ngIf="passwordAreSame && !fff.valid ">
+        <strong>Invalid Passwords</strong>
+      <br>
       </div>
 
-
-      <div class="alert alert-danger" *ngIf="userError ">
-         {{userError}}
-        <br>
-      </div>
-
-
-      <div class="alert alert-danger" *ngIf="passwordNotEquals">
-        Passwords are not equal, please insert the same passwords.
-        <br>
-        <br>
-      </div>
-
-      <div class="alert alert-danger" *ngIf="passwordError">
-         {{passwordError}}
-        <br>
-      </div>
 
     </form>
 
 
     <br>
+
+
     <div id="formFooter">
       <span
         style="font-family: 'Neucha', cursive; font-size: 22px"
