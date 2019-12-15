@@ -1,6 +1,8 @@
 <link href="https://fonts.googleapis.com/css?family=Neucha&display=swap" rel="stylesheet">
 
-<a style="font-size: 30px" routerLink="login-heb">תפריט בעברית</a>
+<a style="font-size: 30px" routerLink="/login-heb">תפריט בעברית</a>
+
+
 
 
 <div class="background">
@@ -13,6 +15,8 @@
     <form (ngSubmit)="submitButton(fff)" #fff="ngForm">
 
       <h1>{{loginMode? 'Welcome to login': 'Welcome to register'}}</h1>
+
+      <app-spinner *ngIf="spinnerOn"></app-spinner>
 
       <br>
 
@@ -85,12 +89,6 @@
       <br>
       </div>
 
-
-
-      <div class="alert alert-danger text-center"  *ngIf="passwordAreSame && !fff.valid ">
-        <strong>Invalid Passwords</strong>
-      <br>
-      </div>
 
 
     </form>

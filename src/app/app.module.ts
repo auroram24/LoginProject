@@ -11,6 +11,7 @@ import { MenuComponent } from './menu/menu.component';
 
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { LoginHebComponent } from './login/login-heb/login-heb.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { LoginHebComponent } from './login/login-heb/login-heb.component';
     LoginComponent,
     MenuComponent,
     LoginHebComponent,
+    SpinnerComponent,
 
   ],
   imports: [

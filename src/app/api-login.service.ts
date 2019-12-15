@@ -54,11 +54,6 @@ export class ApiLoginService {
         }
       ));
   }
-
-
-
-
-
   // handlerError(errorObject: HttpErrorResponse) {
   //   if (errorObject.status === 0) {
   //     return throwError('Server is down, try again later');
